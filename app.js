@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 require("express-async-errors");
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
+app.use(cookieParser(process.env.JWT_SECRET));
 
 app.get("/", (req, res) => {
   res.send("ECommerce-API");

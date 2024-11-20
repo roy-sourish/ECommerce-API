@@ -31,11 +31,16 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", async function () {
-  console.log("presave")
+  console.log("presave");
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+/**
+ *
+ * @param {*} candidatePassword password to be checked
+ * @returns bool
+ */
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;
