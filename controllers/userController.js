@@ -6,6 +6,7 @@ const CustomError = require("../errors");
  * GET => /api/v1/users/
  */
 const getAllUsers = async (req, res) => {
+  console.log("userController:: request user", req.user);
   const users = await User.find({ role: "user" }).select("-password");
   if (!users) {
     throw new CustomError.NotFoundError("Resource not found!");

@@ -41,7 +41,6 @@ const login = async (req, res) => {
   // create token and attach it to the response
   const tokenUser = { name: user.name, userId: user._id, role: user.role };
   attachCookiesToResponse({ res, user: tokenUser });
-  console.log(req.signedCookies.token);
   res.status(StatusCodes.OK).json({ user: tokenUser });
 };
 
