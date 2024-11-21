@@ -1,6 +1,11 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
+const {
+  createUserToken,
+  attachCookiesToResponse,
+  checkPermissions,
+} = require("../utils");
 /**
  * Get all users
  * GET => /api/v1/users/
@@ -24,6 +29,7 @@ const getSingleUser = async (req, res) => {
   if (!user) {
     throw new CustomError.NotFoundError("Resource not found!");
   }
+  checkPermissions(req.user, user._id);
   res.status(StatusCodes.OK).json({ user });
 };
 
@@ -40,7 +46,24 @@ const showCurrentUser = async (req, res) => {
  * @route GET => /api/v1/users/
  */
 const updateUser = async (req, res) => {
-  res.json({ msg: "update user" });
+  const { name, email } = req.body;
+  if (!name || !email) {
+    throw new CustomError.BadRequestError("Please provide name and email");
+  }
+  const user = await User.findOneAndUpdate(
+    { _id: req.user.userId },
+    { name, email },
+    { returnOriginal: false, runValidators: true }
+  );
+  /**
+   * @NOTE: if we manually update the email and password and do a user.save()
+   *        like in updateUserPassword(), it will invoke the pre-save and the
+   *        hashed-password will get rehashed again resulting in throwing an
+   *        invaild credentials error.
+   *  */
+  const tokenUser = createUserToken(user);
+  attachCookiesToResponse({ res, user: tokenUser });
+  res.json({ user });
 };
 
 /**
