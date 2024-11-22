@@ -30,7 +30,9 @@ const getAllProducts = async (req, res) => {
  * GET => /api/v1/products/:id
  */
 const getSingleProduct = async (req, res) => {
-  const product = await Product.findOne({ _id: req.params.id });
+  const product = await Product.findOne({ _id: req.params.id }).populate(
+    "reviews"
+  );
   if (!product) {
     throw new CustomError.NotFoundError("Resource not found");
   }
@@ -73,6 +75,7 @@ const deleteProduct = async (req, res) => {
  * POST => /api/v1/products
  */
 const uploadImage = async (req, res) => {
+  /* @TODO: use Multer to handld upload image functionality */
   res.status(StatusCodes.OK).json({ msg: "upload product image" });
 };
 

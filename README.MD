@@ -90,7 +90,7 @@
 - [x] find user, if no user return 401
 - [x] check password, if does not match return 401
 - [x] if everything is correct, attach cookie
-  and send back the same response as in register
+      and send back the same response as in register
 
 #### Logout Route
 
@@ -185,7 +185,7 @@
 
 - [x] add productController file in controllers
 - [x] export (createProduct, getAllProducts,
-  getSingleProduct, updateProduct, deleteProduct, uploadImage) functions
+      getSingleProduct, updateProduct, deleteProduct, uploadImage) functions
 - [x] res.send('function name')
 - [x] setup productRoutes file in routes
 - [x] import all controllers
@@ -200,48 +200,48 @@
 
 #### Create Product
 
-- [] create user property on req.body and set it equal to userId (req.user)
-- [] pass req.body into Product.create
-- [] send back the product
+- [x] create user property on req.body and set it equal to usexrId (req.user)
+- [x] pass req.body into Product.create
+- [x] send back the product
 
 #### Remaining Controllers (apart from uploadImage)
 
-- [] getAllProducts
-- [] getSingleProduct
-- [] updateProduct
-- [] deleteProduct
-- [] typical CRUD, utilize (task or job) project
-- [] remember we check already for role 'admin'
+- [x] getAllProducts
+- [x] getSingleProduct
+- [x] updateProduct
+- [x] deleteProduct
+- [x] typical CRUD, utilize (task or job) project
+- [x] remember we check already for role 'admin'
 
-#### Upload Image
+#### Upload Image - TODO Later
 
 - [] if some question, re-watch 07-file-upload
 - [] images folder with two images
 
 #### Review Model
 
-- [] create Review.js in models folder
-- [] create Schema
-- [] rating : {type:Number}
-- [] title: {type:String}
-- [] comment: {type:String}
-- [] user
-- [] product
-- [] set timestamps
-- [] export Review model
+- [x] create Review.js in models folder
+- [x] create Schema
+- [x] rating : {type:Number}
+- [x] title: {type:String}
+- [x] comment: {type:String}
+- [x] user
+- [x] product
+- [x] set timestamps
+- [x] export Review model
 
 #### Review Structure
 
-- [] add reviewController file in controllers
-- [] export (createReview, getAllReviews, getSingleReview, updateReview, deleteReview) functions
-- [] res.send('function name')
-- [] setup reviewRoutes file in routes
-- [] import all controllers
-- [] only getAllReviews and getSingleReview accessible to public
-- [] rest only to users (setup middleware)
-- [] typical REST setup
-- [] import reviewRoutes as reviewRouter in the app.js
-- [] setup app.use('/api/v1/reviews', reviewRouter)
+- [x] add reviewController file in controllers
+- [x] export (createReview, getAllReviews, getSingleReview, updateReview, deleteReview) functions
+- [x] res.send('function name')
+- [x] setup reviewRoutes file in routes
+- [x] import all controllers
+- [x] only getAllReviews and getSingleReview accessible to public
+- [x] rest only to users (setup middleware)
+- [x] typical REST setup
+- [x] import reviewRoutes as reviewRouter in the app.js
+- [x] setup app.use('/api/v1/reviews', reviewRouter)
 
 #### Create Review
 

@@ -1,5 +1,11 @@
 const CustomError = require("../errors");
 
+/**
+ * 
+ * @param {*} requestUser userId associated with req.user
+ * @param {*} resourceUserId userID associate with the specific resource
+ * @returns 
+ */
 const checkPermissions = (requestUser, resourceUserId) => {
   // console.log(requestUser);
   // console.log(resourceUserId);
