@@ -1,6 +1,10 @@
 const CustomErr = require("../errors");
 const { isTokenValid } = require("../utils");
 
+/**
+ * Authenticates user by looking for the available token and sets the res.user 
+ * as the received token data.
+ */
 const authenticateUser = async (req, res, next) => {
   const token = req.signedCookies.token;
 
@@ -16,6 +20,10 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Route protection middleware - only specified roles (eg: admin, etc...) will be allowed to access
+ * @param  {...any} roles Example: ['admin', 'user', 'owner']
+ */
 const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     console.log("admin route");
