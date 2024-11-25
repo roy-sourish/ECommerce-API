@@ -37,10 +37,15 @@ const createReview = async (req, res) => {
  *
  */
 const getAllReviews = async (req, res) => {
-  const reviews = await Review.find({}).populate({
-    path: "user product",
-    select: "name company price",
-  });
+  const reviews = await Review.find({})
+    .populate({
+      path: "product",
+      select: "name company price",
+    })
+    .populate({
+      path: "user",
+      select: "name",
+    });
   if (!reviews) {
     throw new CustomError.NotFoundError("No reviews available");
   }
@@ -57,7 +62,7 @@ const getSingleReview = async (req, res) => {
     path: "user product",
     select: "name company price",
   });
-  
+
   if (!review) {
     throw new CustomError.NotFoundError("No review available");
   }
@@ -103,10 +108,20 @@ const deleteReview = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "review deleted successfully" });
 };
 
+/**
+ *
+ */
+const getSingleProductReviews = async (req, res) => {
+  const { id: productId } = req.params;
+  const reviews = await Review.find({ product: productId });
+  res.status(StatusCodes.OK).json({ reviews, count: reviews.length });
+};
+
 module.exports = {
   createReview,
   getAllReviews,
   getSingleReview,
   updateReview,
   deleteReview,
+  getSingleProductReviews,
 };
